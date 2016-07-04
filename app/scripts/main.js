@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 var Geo = {};
 var openWeatherKey = '53f9d8e4213222cf517d86dc406d67fc';
 
@@ -20,17 +21,10 @@ function error() {
     alert('Weird. We couldn\'t find you!');
 }
 
-function success(position) {
-    Geo.lat = position.coords.latitude;
-    Geo.lng = position.coords.longitude;
-
-    getWeather(Geo.lat, Geo.lng);
-}
-
 function getWeather(lat,lng) {
-    var Weather = "http://api.openweathermap.org/data/2.5/weather?lat=" 
-                    + lat + "&lon=" + lng 
-                    + "&units=metric" + "&APPID=" + openWeatherKey;
+    var Weather = 'http://api.openweathermap.org/data/2.5/weather?lat=' 
+                    + lat + '&lon=' + lng 
+                    + '&units=metric' + '&APPID=' + openWeatherKey;
     
     $.ajax({
             url: Weather,
@@ -39,7 +33,7 @@ function getWeather(lat,lng) {
                 console.log(data);
                 $('#city').text(data.name);
                 $('#temp').text(Math.round(data.main.temp));
-                $('#description-image').attr('src', "http://openweathermap.org/img/w/" + data.weather[0].icon  + ".png");
+                $('#description-image').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
                 $('#description').text(data.weather[0].description);
             },
             error: function(xhr,status,error){
@@ -47,6 +41,13 @@ function getWeather(lat,lng) {
             }
 
         })
+}
+
+function success(position) {
+    Geo.lat = position.coords.latitude;
+    Geo.lng = position.coords.longitude;
+
+    getWeather(Geo.lat, Geo.lng);
 }
 
 $('#refresh').click(function () {
